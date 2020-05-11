@@ -17,7 +17,8 @@ with open("besede.txt") as datoteka_bazena:
         bazen_besed.append(beseda.strip().lower())
 
 class Igra:
-    def _init_(self, geslo, crke=None):
+
+    def __init__(self, geslo, crke=None):
         self.geslo = geslo.lower()
         if crke is None:
             self.crke = []
