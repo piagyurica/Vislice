@@ -17,8 +17,7 @@ with open("besede.txt") as datoteka_bazena:
         bazen_besed.append(beseda.strip().lower())
 
 class Igra:
-
-    def __init__(self, geslo, crke=None):
+    def __init__(self, geslo, crke=None): #nikol ne sme biti tukaj [], ker ce nardis vec objektov oz vec ljudi igra igro, se bo vsem potem spremenil takoj ko bo nekdo naredil spremembo
         self.geslo = geslo.lower()
         if crke is None:
             self.crke = []
