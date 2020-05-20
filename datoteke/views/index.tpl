@@ -6,7 +6,7 @@
   <h1>Vislice</h1>
 
   <blockquote>
-    Vislice so najboljša igra za preganjanje dolgčasa (poleg tetrisa).
+    Vislice so najboljša igra za preganjanje dolgčasa.
     <small>Študentje</small>
   </blockquote>
 
