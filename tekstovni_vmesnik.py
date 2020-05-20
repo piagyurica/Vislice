@@ -11,10 +11,14 @@ def izpis_zmage(igra):
 
 def izpis_igre(igra):
     text = (
-        f"Stanje gesla: {igra.pravilni_del_gesla()} \n"
+        f"Stanje gesla: {igra.pravilni_del_gesla()} \n\n"
         f"Imaš še {model.STEVILO_DOVOLJENIH_NAPAK - igra.stevilo_napak()} možnosti za napako."
     )
 
+    return text
+
+def izpis_napake(igra):
+    text = "Pazi, ugibaš lahko samo eno črko naenkrat!"
     return text
 
 def zahtevaj_vnos():
@@ -25,16 +29,18 @@ def pozeni_vmesnik():
     trenutna_igra = model.nova_igra()
 
     while True:
-        # pokazemo mu stanje
+        # pokazemo mu stanje, da vidimo, koliko je črk itd.
         print(izpis_igre(trenutna_igra))
-        crka = zahtevaj_vnos()
-        trenutna_igra.ugibaj(crka)
+        crka = zahtevaj_vnos() # cakamo na crko od uporabnika 
+        rezultat_ugiba = trenutna_igra.ugibaj(crka)
+        if rezultat_ugiba == model.VEC_KOT_ENA_CRKA:
+            print(izpis_napake(trenutna_igra))
 
-        if trenutna_igra.zmaga():
+        elif trenutna_igra.zmaga():
             print(izpis_zmage(trenutna_igra))
             break #konec igre
 
-        if trenutna_igra.poraz():
+        elif trenutna_igra.poraz():
             print(izpis_poraza(trenutna_igra))
             break #konec igre
         

@@ -8,6 +8,7 @@ ZACETEK = 'Z'
 PRAVILNA_CRKA = '+'
 PONOVLJENA_CRKA = 'o'
 NAPACNA_CRKA = '-'
+VEC_KOT_ENA_CRKA = ':'
 
 # Konstante za zmago in poraz
 ZMAGA = 'W'
@@ -17,6 +18,7 @@ bazen_besed = []
 with open("besede.txt") as datoteka_bazena:
     for beseda in datoteka_bazena:
         bazen_besed.append(beseda.strip().lower())
+# ali bazen_besed = [beseda.strip().lower() for beseda in datoteka_bazena]
 
 class Igra:
     def __init__(self, geslo, crke=None): #nikol ne sme biti tukaj [], ker ce nardis vec objektov oz vec ljudi igra igro, se bo vsem potem spremenil takoj ko bo nekdo naredil spremembo
@@ -60,6 +62,9 @@ class Igra:
         return " ".join(self.napacne_crke())
 
     def ugibaj(self, ugibana_crka):
+        if len(ugibana_crka) > 1:
+            return VEC_KOT_ENA_CRKA
+            
         ugibana_crka = ugibana_crka.lower()
         if ugibana_crka in self.crke:
             return PONOVLJENA_CRKA
