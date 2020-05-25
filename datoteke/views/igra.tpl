@@ -1,15 +1,12 @@
 % import model
+% rebase('datoteke/views/base.tpl')
 
-<!DOCTYPE html>
-<html>
 
-<body>
+<h1>Vislice</h1>
 
-  <h1>Vislice</h1>
-
-  <blockquote>
-  Vislice so najboljša igra za preganjanje dolgčasa.
-  </blockquote>
+<blockquote>
+Vislice so najboljša igra za preganjanje dolgčasa.
+</blockquote>
 
 <table>
 <tr>
@@ -34,7 +31,7 @@
 % if poskus == "W":
   <h1> ZMAGAL SI </h1>
 
-  <form action="/igra/" method="post">
+  <form action="/nova_igra/" method="post">
     <button type="submit">Nova igra</button>
   </form>
 
@@ -43,18 +40,15 @@
 
   <h3> Pravilno geslo: {{igra.geslo}} </h3>
 
-  <form action="/igra/" method="post">
+  <form action="/nova_igra/" method="post">
     <button type="submit">Nova igra</button>
   </form>   
 
 % else:
-  <form action="/igra/{{id_igre}}/" method="post">
+  <form action="/igra/" method="post">
     Črka: <input type="text" name="crka">
     <button type="submit">Ugibaj novo črko</button>
   </form>
 
 % end
 
-</body>
-
-</html>

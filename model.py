@@ -1,4 +1,5 @@
 import random 
+import json
 
 STEVILO_DOVOLJENIH_NAPAK = 10
 
@@ -103,23 +104,50 @@ class Vislice: # to bo nas container
         else:
             return max(self.igre.keys()) + 1 #boljse kot return len(self.igre.keys()) ker lahko brisemo igre
 
-    def nova_igra(self): # to si predstavljaj kot da na banki odpres nov racun
+    def nova_igra(self): 
+        self.preberi_iz_datoteke()
+        # to si predstavljaj kot da na banki odpres nov racun
         # dobimo svez id
         nov_id = self.prost_id_igre()
         # naredimo novo igro
         sveza_igra = nova_igra()
         # vse to shranimo v self.igre
         self.igre[nov_id] = (sveza_igra, ZACETEK)
+        self.shrani_v_datoteko()
         # vrnemo nov id
         return nov_id
 
     def ugibaj(self, id_igre, crka):
+        self.preberi_iz_datoteke()
         # dobimo staro igro ven
         trenutna_igra, _ = self.igre[id_igre]
         # ugibamo crko, dobimo novo stanje
         novo_stanje = trenutna_igra.ugibaj(crka)
         # zapisemo posodobljeno stanje in igro nazaj v "bazo"
         self.igre[id_igre] = (trenutna_igra, novo_stanje)
+        self.shrani_v_datoteko()
+
+    def shrani_v_datoteko(self): 
+        # slovar iger, ki jih igramo
+        # npr. {1: (("balkon","axfghdis"), "+"), 2: (), "", ...} 
+        # {id_igre: ((geslo, ugibane_crke), stanje_igre)}
+        igre = {}
+        for id_igre, (igra, stanje) in self.igre.items():
+            igre[id_igre] = ((igra.geslo, igra.crke), stanje)  
+        # ali for id_igre, igra in self.igre.items(): # id_igre, (Igra, stanje)
+        # igre[id_igre] = ((igra[0].geslo, igra[0].crke), igra[1])
+
+        with open("stanje_iger.json", "w") as out_file:
+            json.dump(igre, out_file)
+
+    def preberi_iz_datoteke(self):
+        with open("stanje_iger.json", "r") as in_file:
+            igre = json.load(in_file) # mogoce bi bilo smiselno to preimenovat v igre iz diska (to so te nase nove igre ki jih nato zelimo zapisati v self.igre)
+
+        self.igre = {}
+        for id_igre, ((geslo, crke), stanje) in igre.items():
+            self.igre[int(id_igre)] = Igra(geslo, crke), stanje
+
 
 
 
