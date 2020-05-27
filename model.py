@@ -132,7 +132,7 @@ class Vislice: # to bo nas container
         # npr. {1: (("balkon","axfghdis"), "+"), 2: (), "", ...} 
         # {id_igre: ((geslo, ugibane_crke), stanje_igre)}
         igre = {}
-        for id_igre, (igra, stanje) in self.igre.items():
+        for id_igre, (igra, stanje) in self.igre.items(): # items da kljuce in vrednosti, vrednosti so pari
             igre[id_igre] = ((igra.geslo, igra.crke), stanje)  
         # ali for id_igre, igra in self.igre.items(): # id_igre, (Igra, stanje)
         # igre[id_igre] = ((igra[0].geslo, igra[0].crke), igra[1])
@@ -147,6 +147,9 @@ class Vislice: # to bo nas container
         self.igre = {}
         for id_igre, ((geslo, crke), stanje) in igre.items():
             self.igre[int(id_igre)] = Igra(geslo, crke), stanje
+        # ali to naredimo z izpeljanim slovarjem:
+        # self.igre = {int(id_igre): (Igra(geslo, crke), stanje)
+        #              for id_igre, ((geslo, crke), stanje) in igre.items()}
 
 
 
