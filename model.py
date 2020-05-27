@@ -63,13 +63,14 @@ class Igra:
         return " ".join(self.napacne_crke())
 
     def ugibaj(self, ugibana_crka):
-        if len(ugibana_crka) > 1:
+        if len(ugibana_crka) > 1 or len(ugibana_crka) == 0:
             return VEC_KOT_ENA_CRKA
             
         ugibana_crka = ugibana_crka.lower()
+        
         if ugibana_crka in self.crke:
             return PONOVLJENA_CRKA
-
+        
         self.crke.append(ugibana_crka)
 
         if ugibana_crka in self.geslo: #uganil je crko, ali je ze zmagal
